@@ -13,4 +13,10 @@ app.use(cookieParser());
 
 app.use('/api', indexRouter);
 
+app.use((err, req, res, next) => {
+  const { stack } = err;
+  const message = stack.split('\n')[0];
+  res.status(400).json({ message });
+});
+
 module.exports = app;

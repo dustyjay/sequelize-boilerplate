@@ -38,14 +38,14 @@ const onError = (error) => {
     throw error;
   }
   switch (error.code) {
-    case 'EACCES':
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      process.exit(1);
-      break;
-    default:
-      throw error;
+  case 'EACCES':
+    process.exit(1);
+    break;
+  case 'EADDRINUSE':
+    process.exit(1);
+    break;
+  default:
+    throw error;
   }
 };
 

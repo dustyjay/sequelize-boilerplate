@@ -10,6 +10,7 @@
     "lint": "./node_modules/.bin/eslint ./src",
     "pretty": "prettier --write '**/*.{js,json}' '!node_modules/**'",
     "postpretty": "yarn lint --fix",
+    "runQuery": "babel-node ./src/utils/runQuery",
     "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register"
   },
   "keywords": [],

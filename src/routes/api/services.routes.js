@@ -1,7 +1,9 @@
+import { ServiceController } from '../../controllers';
+import { modifyMesaage, performAsyncAction } from '../../middleware';
+
 const router = require('express').Router();
 
 const bodyParser = require('body-parser');
-import { ServiceController } from '../../controllers';
 
 router.use(bodyParser.json());
 
@@ -18,6 +20,7 @@ router
     res.statusCode = 200;
     next();
   })
-  .get(ServiceController.getServices);
+  .get(performAsyncAction, ServiceController.getServices)
+  .post(modifyMesaage, performAsyncAction, ServiceController.insertService);
 
 module.exports = router;
