@@ -13,7 +13,7 @@ This template was created using Node, Express, Postgresql
 - Add your environment variables
 - Sample:\
   `PORT=3000`\
-  `CONNECTION_STRING="postgresql://your_username:your_password@localhost:5432/seq-boilerplate"`
+  `CONNECTION_STRING="postgresql://your_username:your_password@localhost:5432/seq-boilerplate"`\
   PS: Take note of the string quotes in your `CONNECTION_STRING` value
 
 
