@@ -1,17 +1,12 @@
-import {
-  createTables,
-  dropTables,
-  insertIntoTables,
-} from '../src/utils/queryFunctions';
 import { expect, server, BASE_URL } from './setup';
 
 before(async () => {
-  await createTables();
-  await insertIntoTables();
+  // await createTables();
+  // await insertIntoTables();
 });
 
 after(async () => {
-  await dropTables();
+  // await dropTables();
 });
 
 describe('Services Page', () => {

@@ -1,27 +1,65 @@
-import servicesModel from '../models/services.model';
+const Services = require('../models').Services;
 
-const getServices = async (req, res) => {
-  try {
-    const data = await servicesModel.select('id, title, description');
-    res.status(200).json({ data: data.rows });
-  } catch (error) {
-    res.status(200).json({ data: error.stack });
-  }
-};
+module.exports = {
+  async getAllServices(req, res) {
+    try {
+      const collection = await Services.findAll();
+      res.status(200).send(collection);
+    } catch (e) {
+      res.status(500).send(e);
+    }
+  },
 
-const insertService = async (req, res) => {
-  const { title, description } = req.body;
-  const columns = 'title, description';
-  const values = `'${title}', '${description}'`;
-  try {
-    const data = await servicesModel.insert(columns, values);
-    res.status(200).json({ data: data.rows[0] });
-  } catch (error) {
-    res.status(200).json({ data: error.stack });
-  }
-};
+  async getService(req, res) {
+    try {
+      const { id } = req.params;
+      const collection = await Services.findOne({
+        id,
+      });
 
-export default {
-  getServices,
-  insertService,
+      if (collection) {
+        res.status(200).send(collection);
+      } else {
+        res.status(404).send('Services Not Found');
+      }
+    } catch (e) {
+      res.status(500).send(e);
+    }
+  },
+  async createService(req, res) {
+    const { title, description } = req.body;
+    try {
+      const collection = await Services.create({
+        title,
+        description,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+      res.status(201).send(collection);
+    } catch (e) {
+      res.status(400).send(e);
+    }
+  },
+  async updateService(req, res) {
+    try {
+      const { id, title, description } = req.body;
+      const collection = await Services.findOne({
+        id,
+      });
+
+      if (collection) {
+        const updatedCollection = await Services.update({
+          title,
+          description,
+          updatedAt: new Date(),
+        });
+
+        res.status(200).send(updatedCollection);
+      } else {
+        res.status(404).send('Service Not Found');
+      }
+    } catch (e) {
+      res.status(500).send(e);
+    }
+  },
 };

@@ -1,5 +1,4 @@
-import { ServiceController } from '../../controllers';
-import { modifyMesaage, performAsyncAction } from '../../middleware';
+import ServicesController from '../../controllers/services.controller';
 
 const router = require('express').Router();
 
@@ -20,7 +19,13 @@ router
     res.statusCode = 200;
     next();
   })
-  .get(performAsyncAction, ServiceController.getServices)
-  .post(modifyMesaage, performAsyncAction, ServiceController.insertService);
+  .get(ServicesController.getAllServices);
 
+router
+  .route('/:id')
+  .all((req, res, next) => {
+    res.statusCode = 200;
+    next();
+  })
+  .get(ServicesController.getService);
 module.exports = router;
